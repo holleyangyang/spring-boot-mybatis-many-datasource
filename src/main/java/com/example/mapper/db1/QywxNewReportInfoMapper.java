@@ -36,7 +36,7 @@ public interface QywxNewReportInfoMapper {
      * @author 码农猿
      * @date 2019-03-25 23:08:13
      */
-    @Select(value = { "select * from QYWX_NEW_REPORT_INFO " })
+    @Select(value = { "select * from QYWX_SEND_MESSAGE_RECORDED " })
     List<Map> listAll();
 
     @Select(value = { "select count(*) from QYWX_NEW_REPORT_INFO " })
