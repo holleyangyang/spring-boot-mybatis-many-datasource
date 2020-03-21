@@ -13,9 +13,9 @@ public class PageUtils {
         PageResult pageResult = new PageResult();
         pageResult.setPageNum(pageInfo.getPageNum());
         pageResult.setPageSize(pageInfo.getPageSize());
-        pageResult.setTotalSize(pageInfo.getTotal());
+        pageResult.setCount(pageInfo.getTotal());
         pageResult.setTotalPages(pageInfo.getPages());
-        pageResult.setContent(pageInfo.getList());
+        pageResult.setData(pageInfo.getList());
         return pageResult;
     }
 }

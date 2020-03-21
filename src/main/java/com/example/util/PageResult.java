@@ -4,7 +4,21 @@ import java.util.List;
  * 分页返回结果
  */
 public class PageResult {
-    /**
+	private String code ;
+	private String msg ;
+    public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	/**
      * 当前页码
      */
     private int pageNum;
@@ -15,7 +29,7 @@ public class PageResult {
     /**
      * 记录总数
      */
-    private long totalSize;
+    private long count;
     /**
      * 页码总数
      */
@@ -23,7 +37,7 @@ public class PageResult {
     /**
      * 数据模型
      */
-    private List<?> content;
+    private List<?> data;
     public int getPageNum() {
         return pageNum;
     }
@@ -36,22 +50,24 @@ public class PageResult {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    public long getTotalSize() {
-        return totalSize;
-    }
-    public void setTotalSize(long totalSize) {
-        this.totalSize = totalSize;
-    }
+    
     public int getTotalPages() {
         return totalPages;
     }
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
-    public List<?> getContent() {
-        return content;
-    }
-    public void setContent(List<?> content) {
-        this.content = content;
-    }
+	public long getCount() {
+		return count;
+	}
+	public void setCount(long count) {
+		this.count = count;
+	}
+	public List<?> getData() {
+		return data;
+	}
+	public void setData(List<?> data) {
+		this.data = data;
+	}
+   
 }

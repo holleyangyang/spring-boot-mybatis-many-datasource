@@ -12,28 +12,16 @@ public class DataSourceConstant {
     /**
      * mapper 接口包地址
      */
-    public static final String DB1_BASE_PACKAGES = "com.example.mapper.db1";
+    public static final String DB_BASE_PACKAGES = "com.example.mapper";
     /**
      * 数据源配置 前缀
      */
-    public static final String DB1_DATA_SOURCE_PREFIX = "spring.datasource.test1";
+    public static final String DB_DATA_SOURCE_PREFIX = "spring.datasource";
     /**
      * mapper xml文件地址
      */
-    public static final String DB1_MAPPER_LOCATION = "classpath:mybatis/mapper/db1/*.xml";
+    public static final String DB_MAPPER_LOCATION = "classpath:mybatis/mapper/*.xml";
 
 
-    //************** 数据源 2 配置 **************
-    /**
-     * mapper 接口包地址
-     */
-    public static final String DB2_BASE_PACKAGES = "com.example.mapper.db2";
-    /**
-     * 数据源配置 前缀
-     */
-    public static final String DB2_DATA_SOURCE_PREFIX = "spring.datasource.test2";
-    /**
-     * mapper xml文件地址
-     */
-    public static final String DB2_MAPPER_LOCATION = "classpath:mybatis/mapper/db2/*.xml";
+   
 }

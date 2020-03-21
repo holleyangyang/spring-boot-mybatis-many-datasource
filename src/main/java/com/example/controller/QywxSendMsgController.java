@@ -9,14 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.mapper.db1.QywxSendMessgeMapper;
+import com.example.mapper.QywxSendMessgeMapper;
 import com.example.util.HttpClientUtil;
 import com.example.util.JsonUtil;
-import com.example.util.RandomValidateCodeUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,11 +27,12 @@ public class QywxSendMsgController {
 	private QywxSendMessgeMapper qywxSendMessgeMapper;
 
  
+	
     /**
      * 消息发送总调度
      * @return
      */
-	@PostMapping("/sendMsg")
+	@GetMapping("/sendMsg")
 	public List<Map> sendMsg() {
 
 		List<Map<String, Object>> listAgentAll = qywxSendMessgeMapper.listAgentAll();
@@ -87,4 +86,6 @@ public class QywxSendMsgController {
 		qywxSendMessgeMapper.insertQywxSendMessageRecord(mapP);
 	 
 	}
+ 
+	
 }
