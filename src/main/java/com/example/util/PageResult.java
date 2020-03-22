@@ -25,7 +25,7 @@ public class PageResult {
     /**
      * 每页数量
      */
-    private int pageSize;
+    private int pageSize1;
     /**
      * 记录总数
      */
@@ -44,14 +44,15 @@ public class PageResult {
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;
     }
-    public int getPageSize() {
-        return pageSize;
-    }
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
+   
     
-    public int getTotalPages() {
+    public int getPageSize1() {
+		return pageSize1;
+	}
+	public void setPageSize1(int pageSize1) {
+		this.pageSize1 = pageSize1;
+	}
+	public int getTotalPages() {
         return totalPages;
     }
     public void setTotalPages(int totalPages) {

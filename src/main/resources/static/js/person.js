@@ -4,18 +4,31 @@
 
 var user, role, currentID, flag = true;
 function Personload() {
+	
+	
+    var personInfoJson = {
+			"youxiangdizhi":"",
+			"xingbie":"",
+			"zuji":"",
+			"chutaoriqi":"",
+			"chushengriqi":"",
+			"suoshuleibie":""
+		};
+    
+    
+    
     $('#table').bootstrapTable({
-        method: "get",
-        striped: true,
-        singleSelect: false,
-        dataType: "json",
-        pagination: true, //分页
-        pageSize: 10,
-        pageList: [10, 20, 50],
-        pageNumber: 1,
-        search: false, //显示搜索框
-        contentType: "application/x-www-form-urlencoded",
-        queryParams: null,
+        url: "/manager/personInfo/getPersonInfoList?pageSize=2&pageNum=1"  ,
+        method: 'POST', 
+        sidePagination : "client", //分页方式：client客户端分页，server服务端分页（*）
+        pagination : true, //是否显示分页（*）
+        queryParams : personInfoJson, //分页
+        pageSize : 10, //每页显示的记录数
+        pageNumber : 1, //当前第几页
+        pageList : [ 10, 25, 50, 100 ], //记录数可选列表
+        responseHandler: function(data){
+            return data.rows;  //约定rows
+        }, 
         columns: [
 
             {
@@ -64,20 +77,14 @@ function Personload() {
                 }
             }
         ]
-    });
-    getData();
+});
+    
+    
+    
 }
+Personload();
 function getData() {
-    if (flag) {
-        user = "";
-        role = "";
-
-        flag = false;
-    } else {
-        user = $("#user").val();
-        role = $("#role").val();
-
-    }
+   
     
     
     var personInfoJson = {
@@ -93,7 +100,7 @@ function getData() {
     
     $.ajax({
         type: "POST",
-        url: "/manager/personInfo/getPersonInfoList?pageSize=11&pageNum=1"  ,
+        url: "/manager/personInfo/getPersonInfoList?pageSize=2&pageNum=1"  ,
         dataType: "json",
         contentType:"application/json",  
         data: JSON.stringify(personInfoJson),

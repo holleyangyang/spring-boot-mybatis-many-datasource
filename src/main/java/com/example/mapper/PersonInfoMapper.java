@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.entity.PersonInfo;
@@ -17,16 +18,6 @@ import com.example.entity.PersonInfo;
  * @date 2019-03-25 23:08:13
  */
 public interface PersonInfoMapper {
-
-
-    /**
-     * 新增接口
-     *
-     * @param userInfo 人员信息实体
-     * @return 新增的行数
-     * @author 码农猿
-     * @date 2019-03-25 23:08:13
-     */
 	@Insert(" INSERT INTO oasysdb.person_info" + 
 			"(xingming," + 
 			"yingwenming," + 
@@ -67,8 +58,36 @@ public interface PersonInfoMapper {
 			"#{canyuhuodong}," + 
 			"#{fumianziliao},#{tupiandizhi})")
     int addPersonInfo(PersonInfo personInfo);
-    @Select("select * from oasysdb.person_info")
+	
+	@Insert("update oasysdb.person_info set " + 
+		 "youxiangdizhi             =#{youxiangdizhi           }," + 
+   		 "xingbie                   =#{xingbie                 }," + 
+   		 "zuji                      =#{zuji                    }," + 
+   		 "chutaoriqi                =#{chutaoriqi              }," + 
+   		 "chushengriqi              =#{chushengriqi            }," + 
+   		 "suoshuleibie              =#{suoshuleibie            }," + 
+   		 "suozaizuzhi               =#{suozaizuzhi             }," + 
+   		 "chutaoguojia              =#{chutaoguojia            }," + 
+   		 "xingming                  =#{xingming                }," + 
+   		 "zhengjianxinxi            =#{zhengjianxinxi          }," + 
+   		 "qitaxixi                  =#{qitaxixi                }," + 
+   		 "yingwenming               =#{yingwenming             }," + 
+   		 "jiatingqingkuang          =#{jiatingqingkuang        }," + 
+   		 "shoujiaoyuqingkuang       =#{shoujiaoyuqingkuang     }," + 
+   		 "zaijingneichuliqingkuang  =#{zaijingneichuliqingkuang}," + 
+   		 "zhiwei                    =#{zhiwei                  }," + 
+   		 "canyuhuodong              =#{canyuhuodong            }," + 
+   		 "fumianziliao              =#{fumianziliao            }, "+
+   		"tupiandizhi              =#{tupiandizhi            } "+
+   		 "where  id=#{id}")
+	int updatePersonInfoById(PersonInfo personInfo);
+	
+	 @Select("select * from oasysdb.person_info where id=#{id}")
     List<PersonInfo> getPersonInfoList(PersonInfo personInfo);
-    @Delete("delete from oasysdb.person_info where id=#{id}")
+    
+    @Select("select * from oasysdb.person_info where id=#{id}")
+    PersonInfo getPersonInfoById (@Param(value="id") int id);
+    
+     @Delete("delete from oasysdb.person_info where id=#{id}")
     int deletePersonInfoForId(PersonInfo personInfo);
 }
