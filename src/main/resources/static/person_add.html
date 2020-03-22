@@ -18,8 +18,7 @@
 
 <body style="border-radius: 8px" onload="change()">
 <!--<div class="title"><h2>通知详情</h2></div>-->
-<form id="form_demo" >
-<div class="top">
+ <div class="top">
     <div>
         <div class="top_out">
 		
@@ -28,17 +27,22 @@
 
                 <tr>
                     <td style="border-top: none" >姓名：</td>
-                    <td     style="text-align: left;border-top: none"><input type="text"  name ="xingming" minlength="2" ></td>
+                    <td     style="text-align: left;border-top: none"><input type="text"  id="xingming" minlength="2" ></td>
 					<td style="border-top: none" >英文名：</td>
 					
-                    <td   style="text-align: left;border-top: none"><input type="text"  name ="yingwenming" minlength="2" ></td>
-					<td  rowspan="3"> <img src="images/timg.jpg"  style="width:140px;height:160px" /></td>
+                    <td   style="text-align: left;border-top: none"><input type="text"  id="yingwenming" minlength="2" ></td>
+					<td  rowspan="3" align="center">
+					<form id="form-avatar" enctype="multipart/form-data">
+   
+    <!--只能选择单个个文件-->
+     <input type="file" name="file" /> 
+     </form></td>
                 </tr>
                 <tr>
 					<td>出生日期：</td>
-                    <td   style="text-align: left"><input type="chushengriqi" class="long_text" id="person"></td>
+                    <td   style="text-align: left"><input id="chushengriqi" class="long_text" id="person"></td>
                     <td>性别：</td>
-                    <td  style="text-align: left"><select>
+                    <td  style="text-align: left"><select id="xingbie">
                         <option>男</option>
 						  <option>女</option>
                     </select></td>
@@ -46,27 +50,27 @@
                 </tr>
                 <tr>
                     <td>祖籍：</td>
-                    <td  style="text-align: left"> <input type="text"  name ="zuji" minlength="2" ></td>
+                    <td  style="text-align: left"> <input type="text"  id="zuji" minlength="2" ></td>
                     <td>证件信息：</td>
-                    <td   style="text-align: left"><input type="text"  name ="zhengjianxinxi" minlength="2" ></td>
+                    <td   style="text-align: left"><input type="text"  id="zhengjianxinxi" minlength="2" ></td>
                  </tr>
 				  <tr>
                     <td>出逃日期：</td>
-                    <td  style="text-align: left"> <input type="text"  name ="chutaoriqi" minlength="2" ></td>
+                    <td  style="text-align: left"> <input type="text"  id="chutaoriqi" minlength="2" ></td>
                     <td>出逃国家：</td>
-                    <td  style="text-align: left"><input type="text"  name ="chutaoguojia" minlength="2" ></td>
-					 <td  rowspan="2"> <input type="file"  name ="name" minlength="2" ></td>
+                    <td  style="text-align: left"><input type="text"  id="chutaoguojia" minlength="2" ></td>
+					 <td  rowspan="2">    <input class="btn" type="button" value="上传" onclick="upload()"/> </td>
                  </tr>
 				  <tr>
                     <td>所在组织：</td>
-                    <td  style="text-align: left"> <input type="text"  name ="suozaizuzhi" minlength="2" ></td>
+                    <td  style="text-align: left"> <input type="text"  id="suozaizuzhi" minlength="2" ></td>
                     <td>职位：</td>
-                    <td  style="text-align: left"><input type="text"  name ="zhiwei" minlength="2" ></td>
+                    <td  style="text-align: left"><input type="text"  id="zhiwei" minlength="2" ></td>
                  </tr>
 				<tr>
                     <td>所属类别：</td>
                     <td colspan="4"   style="text-align: left">
-					<select name="suoshuleibie">
+					<select id="suoshuleibie">
                         <option>境外</option>
 						  <option>境内</option>
 						    <option>美西</option>
@@ -78,37 +82,37 @@
                 </tr>
 				<tr>
                     <td>受教育情况：</td>
-                    <td colspan="4"style="text-align: left"><input type="text"   name="shoujiaoyuqingkuang"   minlength="2" ></td>
+                    <td colspan="4"style="text-align: left"><input type="text"   id="shoujiaoyuqingkuang"   minlength="2" ></td>
 					 
                 </tr>
 				<tr>
                     <td>家庭情况：</td>
-                    <td colspan="4"  style="text-align: left"><input type="text"  name="jiatingqingkuang" minlength="2" ></td>
+                    <td colspan="4"  style="text-align: left"><input type="text"  id="jiatingqingkuang" minlength="2" ></td>
 					 
                 </tr>
 				<tr>
                     <td>邮箱地址：</td>
-                    <td colspan="4"  style="text-align: left"><input type="text"  name ="youxiangdizhi" minlength="2" ></td>
+                    <td colspan="4"  style="text-align: left"><input type="text"  id="youxiangdizhi" minlength="2" ></td>
 					 
                 </tr>
 				<tr>
                     <td>其他信息：</td>
-                    <td colspan="4"  style="text-align: left"><input type="text"  name ="qitaxixi" minlength="2" ></td>
+                    <td colspan="4"  style="text-align: left"><input type="text"  id="qitaxixi" minlength="2" ></td>
 					 
                 </tr>				
                 <tr>
                     <td style="line-height: 100px">在境内处理情况</td>
-                    <td  colspan="4" style="text-align: left"><textarea  id="note"  name="zaijingneichuliqingkuang" style="width: 100%;height: 80px"></textarea></td>
+                    <td  colspan="4" style="text-align: left"><textarea     id="zaijingneichuliqingkuang" style="width: 100%;height: 80px"></textarea></td>
 					 
                 </tr>           
 				<tr>
                     <td style="line-height: 100px">参与活动：</td>
-                    <td colspan="4"  style="text-align: left"><textarea  name="canyuhuodong" id="note" style="width: 100%;height: 80px"></textarea></td>
+                    <td colspan="4"  style="text-align: left"><textarea  id="canyuhuodong" style="width: 100%;height: 80px"></textarea></td>
 					 
                 </tr>
 				<tr>
                     <td>负面资料：</td>
-                    <td colspan="4"  style="text-align: left"><textarea   name="fumianziliao" id="note" style="width: 100%;height: 80px"></textarea></td>
+                    <td colspan="4"  style="text-align: left"><textarea   id="fumianziliao"  style="width: 100%;height: 80px"></textarea></td>
 					 
                 </tr>					
                 </tbody>
@@ -116,87 +120,66 @@
         </div>
     </div>
     <div class="bot_btn">
-        <input class="btn" type="submit" value="保存" onclick="RecodeSave()"/>
+        <input class="btn" type="button" value="保存" onclick="RecodeSave()"/>
         <button class="btn btn1"><a href="notice.html" target="right">返回</a></button>
     </div>
 </div>
-</form>
-</body>
+ </body>
 <script type="text/javascript" src="js/jquery.js"></script>
-<script >
-    $.validator.setDefaults({
-        submitHandler: function() {
-            alert("修改成功");
-        }
-    });
-    $().ready(function() {
-        $("#form_demo").validate();
-    });
-</script>
+ 
 <script src="js/date/js/laydate.js"></script>
 <script>
-    var PROJECTID, TASKTYPE, TASKPHASE,  PERSONID
-    !function () {
-        laydate.skin('danlan');//切换皮肤，请查看skins下面皮肤库
-        laydate({ elem: '#demo' });//绑定元素
-        laydate({ elem: '#demo1' });
-        laydate({ elem: '#demo2' });//绑定元素
-    }();
-    function init() {
-        if (parent.getCurrentID() != "") {
-            $.ajax({
-                url: '../TaskRecord/SearchTaskById?taskId=' + parent.getCurrentID(),
-                type: 'POST',
-                dataType: 'json',
-                success: function (result) {
-                    var data = result.data;
-                    if (data) {
-                        PROJECTID = data.PROJECTID
-                        PERSONID =data.PERSONID
-                        TASKPHASE = data.TASKPHASE;
-                        TASKTYPE = data.TASKTYPE;
-                        $("#tit").val(data.PROJECTNAME);
-                        $("#person").val(data.TASKPHASENAME);
-
-
-                        $("#demo").val(getFormatTime(data.STARTTIME.substring(6,19)));
-
-
-                        $("#NOTE").val(data.NOTE);
-
-
-
-                    }
-                    else {
-                        alert("获取失败！");
-                    }
-                },
-                error: function (err) {
-                }
-            })
-
-        }
-
+    
+var tupiandizhi = "";
+    function upload(){
+    	
+    	$.ajax({
+     	    url : "/file/upload", 
+                 type: 'POST',
+                 cache: false,
+                 data:new FormData($('#form-avatar')[0]),//h5的DataForm对象
+               
+                 processData: false,
+                 contentType: false,
+                 success:function(data){
+                	 tupiandizhi = data;
+                	 }
+                 });
     }
     function RecodeSave() {
+             
+            
+			    	var personInfoJson = {
+							"youxiangdizhi":$("#youxiangdizhi").val(),
+							"xingbie":$("#xingbie").val(),
+							"zuji":$("#zuji").val(),
+							"chutaoriqi":$("#chutaoriqi").val(),
+							"chushengriqi":$("#chushengriqi").val(),
+							"suoshuleibie":$("#suoshuleibie").val(),
+							"suozaizuzhi":$("#suozaizuzhi").val(),
+							"chutaoguojia":$("#chutaoguojia").val(),
+							"xingming":$("#xingming").val(),
+							"zhengjianxinxi":$("#zhengjianxinxi").val(),
+							"qitaxixi":$("#qitaxixi").val(),
+							"yingwenming":$("#yingwenming").val(),
+							"jiatingqingkuang":$("#jiatingqingkuang").val(),
+							"shoujiaoyuqingkuang":$("#shoujiaoyuqingkuang").val(),
+							"zaijingneichuliqingkuang":$("#zaijingneichuliqingkuang").val(),
+							"zhiwei":$("#zhiwei").val(),
+							"canyuhuodong":$("#canyuhuodong").val(),
+							"fumianziliao":$("#fumianziliao").val(),
+							"tupiandizhi":tupiandizhi
+			    		};
+			console.info(personInfoJson);
+			    	
         $.ajax({
             type: "POST",
-            url: "../TaskRecord/UpdateTask",
-            data: {
-                TASKID: parent.getCurrentID(),
-                PROJECTID: PROJECTID,
-                STATE: $("#tit").val(),
-                STARTTIME: $("#demo").val(),
-
-                PERSONID: PERSONID,
-                NOTE: $("#NOTE").val(),
-                TASKTYPE: $("#part").val(),
-                TASKPHASE: $("#person").val(),
-
-            },
+            url: "/manager/personInfo/addPersonInFo",
+            data: JSON.stringify(personInfoJson),
+            contentType:"application/json",  
             dataType: "json",
             success: function (result) {
-                if (result.data) {
+                if (result.code=="0") {
                     alert("保存成功！！！");
                     parent.getRecodeTableData();
                     TaskCancel();
@@ -204,7 +187,8 @@
                     alert("保存失败！！！")
                 }
             }
-        })
+        });
+         
     }
     function TaskCancel() {
         var index = parent.layer.getFrameIndex(window.name)

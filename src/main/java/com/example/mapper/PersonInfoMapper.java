@@ -1,8 +1,9 @@
 package com.example.mapper;
 
 import java.util.List;
-import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.entity.PersonInfo;
@@ -26,21 +27,48 @@ public interface PersonInfoMapper {
      * @author 码农猿
      * @date 2019-03-25 23:08:13
      */
-    int insert(PersonInfo userInfo);
-
-
-    /**
-     * 查询所有 人员信息
-     *
-     * @return 人员信息 列表
-     * @author 码农猿
-     * @date 2019-03-25 23:08:13
-     */
-    @Select(value = { "select * from QYWX_SEND_MESSAGE_RECORDED " })
-    List<Map> listAll();
-
-    @Select(value = { "select count(*) from QYWX_NEW_REPORT_INFO " })
-    int count();
-
-
+	@Insert(" INSERT INTO oasysdb.person_info" + 
+			"(xingming," + 
+			"yingwenming," + 
+			"chushengriqi," + 
+			"xingbie," + 
+			"zuji," + 
+			"zhengjianxinxi," + 
+			"chutaoriqi," + 
+			"chutaoguojia," + 
+			"suozaizuzhi," + 
+			"zhiwei," + 
+			"suoshuleibie," + 
+			"shoujiaoyuqingkuang," + 
+			"jiatingqingkuang," + 
+			"youxiangdizhi," + 
+			"qitaxixi," + 
+			"zaijingneichuliqingkuang," + 
+			"canyuhuodong," + 
+			"fumianziliao,tupiandizhi)" + 
+			"VALUES" + 
+			"(" + 
+			"#{xingming}," + 
+			"#{yingwenming}," + 
+			"#{chushengriqi}," + 
+			"#{xingbie}," + 
+			"#{zuji}," + 
+			"#{zhengjianxinxi}," + 
+			"#{chutaoriqi}," + 
+			"#{chutaoguojia}," + 
+			"#{suozaizuzhi}," + 
+			"#{zhiwei}," + 
+			"#{suoshuleibie}," + 
+			"#{shoujiaoyuqingkuang}," + 
+			"#{jiatingqingkuang}," + 
+			"#{youxiangdizhi}," + 
+			"#{qitaxixi}," + 
+			"#{zaijingneichuliqingkuang}," + 
+			"#{canyuhuodong}," + 
+			"#{fumianziliao},#{tupiandizhi})")
+    int addPersonInfo(PersonInfo personInfo);
+    @Select("select * from oasysdb.person_info")
+    List<PersonInfo> getPersonInfoList(PersonInfo personInfo);
+    @Delete("delete from oasysdb.person_info where id=#{id}")
+    int deletePersonInfoForId(PersonInfo personInfo);
 }

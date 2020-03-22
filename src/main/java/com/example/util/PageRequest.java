@@ -12,7 +12,9 @@ public class PageRequest {
      */
     private int pageSize;
     
-    public int getPageNum() {
+ 
+  
+	public int getPageNum() {
         return pageNum;
     }
     public void setPageNum(int pageNum) {
@@ -24,4 +26,5 @@ public class PageRequest {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+    
 }

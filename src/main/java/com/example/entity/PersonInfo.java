@@ -4,6 +4,8 @@ package com.example.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import net.sf.json.JSONObject;
+
 /**
  * 人员信息实体类
  *
@@ -32,6 +34,14 @@ public class PersonInfo implements Serializable {
     private String zaijingneichuliqingkuang;
     private String canyuhuodong;
     private String fumianziliao;
+    
+    private String tupiandizhi;
+	public String getTupiandizhi() {
+		return tupiandizhi;
+	}
+	public void setTupiandizhi(String tupiandizhi) {
+		this.tupiandizhi = tupiandizhi;
+	}
 	public String getXingming() {
 		return xingming;
 	}
@@ -148,6 +158,12 @@ public class PersonInfo implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public static void main(String[] args) {
+		PersonInfo n = new PersonInfo();
+		System.out.println(JSONObject.fromObject(n).toString());
+		
 	}
     
 

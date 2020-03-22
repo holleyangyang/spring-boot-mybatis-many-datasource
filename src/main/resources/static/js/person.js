@@ -11,6 +11,7 @@ function Personload() {
         dataType: "json",
         pagination: true, //分页
         pageSize: 10,
+        pageList: [10, 20, 50],
         pageNumber: 1,
         search: false, //显示搜索框
         contentType: "application/x-www-form-urlencoded",
@@ -24,30 +25,30 @@ function Personload() {
                 valign: 'middle'
             },
             {
-                title: "用户名",
-                field: 'class',
+                title: "姓名",
+                field: 'xingming',
                 align: 'center',
                 valign: 'middle'
             },
             {
-                title: '角色',
-                field: 'sex',
+                title: '英文名',
+                field: 'yingwenming',
                 align: 'center',
                 valign: 'middle'
             },
             {
-                title: '部门',
-                field: 'type',
+                title: '性别',
+                field: 'xingbie',
                 align: 'center'
             },
             {
-                title: '密码',
-                field: 'work',
+                title: '出逃日期',
+                field: 'chutaoriqi',
                 align: 'center'
             },
             {
-                title: '状态',
-                field: 'name',
+                title: '出逃国家',
+                field: 'chutaoguojia',
                 align: 'center',
                 valign: 'middle'
             },
@@ -57,8 +58,8 @@ function Personload() {
                 field: '',
                 align: 'center',
                 formatter: function (value, row) {
-                    var e = '<button button="#" mce_href="#" onclick="delNotice(\'' + row.WORKRECORDID + '\')">删除</button> '
-                    var d = '<button button="#" mce_href="#" onclick="editNotice(\'' + row.WORKRECORDID + '\')">编辑</button> ';
+                    var e = '<button button="#" mce_href="#" onclick="del(\'' + row.id + '\')">删除</button> '
+                    var d = '<button button="#" mce_href="#" onclick="editNotice(\'' + row.id + '\')">编辑</button> ';
                     return e + d;
                 }
             }
@@ -77,10 +78,25 @@ function getData() {
         role = $("#role").val();
 
     }
+    
+    
+    var personInfoJson = {
+			"youxiangdizhi":"",
+			"xingbie":"",
+			"zuji":"",
+			"chutaoriqi":"",
+			"chushengriqi":"",
+			"suoshuleibie":""
+		};
+    
+    
+    
     $.ajax({
-        type: "GET",
-        url: "../WorkRecord/SearchWork?dtStart=" + user + "&dtEnd=" + role ,
+        type: "POST",
+        url: "/manager/personInfo/getPersonInfoList?pageSize=11&pageNum=1"  ,
         dataType: "json",
+        contentType:"application/json",  
+        data: JSON.stringify(personInfoJson),
         success: function (result) {
             if (result.data) {
                 var TableData = result.data;
@@ -98,14 +114,20 @@ function edit(id) {
     currentID = id;
 }
 function del(id) {
-    alert(id)
-    var NoticeId = id;
+    
+    var personInfoJson = {
+			 
+			"id":id
+		};
+
     $.ajax({
-        url: '../WorkRecord/DeleteWork?workId=' + NoticeId,
-        type: 'GET',
-        dataType: 'json',
+        url: "/manager/personInfo/deletePersonInfoForId"  ,
+        type: 'POST',
+        dataType: "json",
+        contentType:"application/json",  
+        data: JSON.stringify(personInfoJson),      
         success: function (data) {
-            if (data.data) {
+            if (data.code=="0") {
                 alert("删除成功！")
                 getData();
             } else {
@@ -126,7 +148,7 @@ function openlayer(id){
         shadeClose: true,
         shade: 0.5,
         skin: 'layui-layer-rim',
-//            maxmin: true,
+        maxmin: true,
         closeBtn:2,
         area: ['80%', '90%'],
         shadeClose: true,
