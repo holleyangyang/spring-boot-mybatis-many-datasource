@@ -88,6 +88,9 @@ public interface PersonInfoMapper {
 	 		+ "</script>")
     List<PersonInfo> getPersonInfoList(PersonInfo personInfo);
     
+	 @Select("  select * from oasysdb.person_info ")
+	  List<PersonInfo> getPersonInfoListAll(PersonInfo personInfo);
+	 
     @Select("select * from oasysdb.person_info where id=#{id}")
     PersonInfo getPersonInfoById (@Param(value="id") int id);
     

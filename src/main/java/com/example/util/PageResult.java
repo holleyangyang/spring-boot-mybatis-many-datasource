@@ -26,18 +26,20 @@ public class PageResult {
      * 每页数量
      */
     private int pageSize;
-    /**
-     * 记录总数
-     */
-    private long count;
+//    /**
+//     * 记录总数
+//     */
+//    private long count;
+    
+    private long total;
     /**
      * 页码总数
      */
     private int totalPages;
-    /**
-     * 数据模型
-     */
-    private List<?> data;
+//    /**
+//     * 数据模型
+//     */
+//    private List<?> data;
     /**
      * 数据模型
      */
@@ -51,24 +53,30 @@ public class PageResult {
    
     
  
+	public long getTotal() {
+		return total;
+	}
+	public void setTotal(long total) {
+		this.total = total;
+	}
 	public int getTotalPages() {
         return totalPages;
     }
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
-	public long getCount() {
-		return count;
-	}
-	public void setCount(long count) {
-		this.count = count;
-	}
-	public List<?> getData() {
-		return data;
-	}
-	public void setData(List<?> data) {
-		this.data = data;
-	}
+//	public long getCount() {
+//		return count;
+//	}
+//	public void setCount(long count) {
+//		this.count = count;
+//	}
+//	public List<?> getData() {
+//		return data;
+//	}
+//	public void setData(List<?> data) {
+//		this.data = data;
+//	}
 	public int getPageSize() {
 		return pageSize;
 	}

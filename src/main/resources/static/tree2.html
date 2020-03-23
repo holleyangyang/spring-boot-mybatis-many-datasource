@@ -65,7 +65,7 @@
         		            zTree.expandNode(treeNode);
         		            return false;
         		          } else {
-        		            demoIframe.attr("src", treeNode.file + "");
+        		            demoIframe.attr("src", treeNode.file + ".html");
         		            return true;
         		          }
         		        }
@@ -74,12 +74,12 @@
         		    
         	      var t = $("#tree");
         	      t = $.fn.zTree.init(t, setting, zNodes);
-        	      demoIframe = $("#testIframe");
-        	      demoIframe.bind("load", loadReady);
+        	      //demoIframe = $("#testIframe");
+        	     // demoIframe.bind("load", loadReady);
         	      var zTree = $.fn.zTree.getZTreeObj("tree");
         	      zTree.selectNode(zTree.getNodeByParam("id", 101));
 
-        	  
+        	    });
 
         	    function loadReady() {
         	      var bodyH = demoIframe.contents().find("body").get(0).scrollHeight,
@@ -89,11 +89,183 @@
         	      if (h < 530) h = 530;
         	      demoIframe.height("100%");
         	    }
-        	  });
         }
     })
     
-   
+    
+    var test = 
+    	[
+    	    {
+    	        name: "境外",
+    	        pId: 0,
+    	        id: -1,
+    	       open: true
+    	    },
+    	    {
+    	        name: "境内",
+    	        pId: 0,
+    	        id: -2,
+    	       open: true
+    	    },
+    	    {
+    	        name: "美西",
+    	        pId: 0,
+    	        id: -3,
+    	       open: true
+    	    },
+    	    {
+    	        name: "敌对媒体",
+    	        pId: 0,
+    	        id: -4,
+    	       open: true
+    	    },
+    	    {
+    	        name: "国际媒体",
+    	        pId: 0,
+    	        id: -5,
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=1",
+    	        name: "张三",
+    	        pId: "-2",
+    	        id: "1",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=3",
+    	        name: "211212",
+    	        pId: "-2",
+    	        id: "3",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=4",
+    	        name: "211212",
+    	        pId: "-2",
+    	        id: "4",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=5",
+    	        name: "211212",
+    	        pId: "-2",
+    	        id: "5",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=6",
+    	        name: "211212",
+    	        pId: "-2",
+    	        id: "6",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=7",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "7",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=8",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "8",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=9",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "9",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=10",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "10",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=11",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "11",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=12",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "12",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=13",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "13",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=14",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "14",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=15",
+    	        name: "12",
+    	        pId: "-2",
+    	        id: "15",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=16",
+    	        name: "32",
+    	        pId: "-2",
+    	        id: "16",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=17",
+    	        name: "21",
+    	        pId: "-2",
+    	        id: "17",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=18",
+    	        name: "21",
+    	        pId: "-2",
+    	        id: "18",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=19",
+    	        name: "2334反反复复",
+    	        pId: "-2",
+    	        id: "19",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=20",
+    	        name: "1245789+",
+    	        pId: "-2",
+    	        id: "20",
+    	       open: true
+    	    },
+    	    {
+    	        file: "person_edit.html?id=21",
+    	        name: "1222112",
+    	        pId: "-2",
+    	        id: "21",
+    	       open: true
+    	    }
+    	];
     
 /*
     var zNodes = [

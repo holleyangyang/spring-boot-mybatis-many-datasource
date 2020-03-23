@@ -1,37 +1,17 @@
-/**
- * Created by Administrator on 2016/8/4.
- */
-
-var user, role, currentID, flag = true;
 function Personload() {
 	
-	
-    var personInfoJson = {
-			"youxiangdizhi":"",
-			"xingbie":"",
-			"zuji":"",
-			"chutaoriqi":"",
-			"chushengriqi":"",
-			"suoshuleibie":"",
-		};
-    
-    
-    
-    $('#table').bootstrapTable({
+	$("#table").bootstrapTable({
+        method : 'post',
+       striped : true,
+        // cache :false,
         url: "/manager/personInfo/getPersonInfoList"  ,
-        method: 'POST', 
-        sidePagination : "client", //分页方式：client客户端分页，server服务端分页（*）
-        pagination : true, //是否显示分页（*）
-        queryParams : JSON.stringify(personInfoJson), //分页
-        pageSize : 10, //每页显示的记录数
-        contentType:"application/json",  
-
-        pageNumber : 1, //当前第几页
-        pageList : [ 10], //记录数可选列表
-        responseHandler: function(data){
-            return data.rows;  //约定rows
-        }, 
-        columns: [
+        pagination :true,
+        sidePagination : 'server', // client/server
+        pageNumber : 1,
+        pageSize : 10,
+        pageList : [10,20,30,40],
+        paginationLoop : false,
+        columns :  [
 
             {
             	 title: "ID",
@@ -90,11 +70,23 @@ function Personload() {
                     return e + d+f;
                 }
             }
-        ]
-});
-    
-    
-    
+        ],
+        formatLoadingMessage: function() {                    // 表格生成过程中执行的方法
+            return '请稍等，正在加载中...';                        // 返回一串等待文字
+        },
+        formatNoMatches: function() {                          // 没有匹配的结果执行的方法
+            return '无符合条件的记录';                            // 返回一串提示文字
+        },
+        onLoadSuccess : function(data) {
+            console.log("----"+data);
+        },
+         queryParams : function(params){
+             console.log(params);
+             return $.extend({}, params, {
+            		"suozaizuzhi":$("#suozaizuzhi").val()
+             });
+         }
+    })
 }
 
 function getPara (){
@@ -113,18 +105,18 @@ function getPara (){
 
 Personload();
 function getData() {
+ 
     $.ajax({
         type: "POST",
         url: "/manager/personInfo/getPersonInfoList"  ,
         dataType: "json",
-        
         contentType:"application/json",  
         data: JSON.stringify(getPara()),
         success: function (result) {
-            if (result.data) {
-                var TableData = result.data;
-                $('#table').bootstrapTable("load", TableData);
-            }
+            if (result.code=="0") {
+                var TableData = result.rows;
+                $('#table').bootstrapTable("load", result);
+             }
         }
     })
 }
