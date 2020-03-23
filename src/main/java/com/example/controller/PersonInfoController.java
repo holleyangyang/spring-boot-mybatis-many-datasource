@@ -90,11 +90,13 @@ public class PersonInfoController {
 	}
 	
 	@PostMapping("/getPersonInfoList")
-	public PageResult getAllUser( PersonInfo personInfo,int pageNum,int pageSize) {
+	public PageResult getAllUser(@RequestBody PersonInfo personInfo) {
+		
+	    System.out.println(personInfo.toString());
+		
          PageRequest pageRequest = new PageRequest();
-         
-         pageRequest.setPageNum(pageNum);
-         pageRequest.setPageSize(pageSize);
+         pageRequest.setLimit(personInfo.getLimit());
+         pageRequest.setOffset(personInfo.getOffset()); 
           PageResult  pageResult=PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest,personInfo));
          pageResult.setCode("0");
 		return pageResult;
@@ -114,9 +116,8 @@ public class PersonInfoController {
 	
 	
    private PageInfo<PersonInfo> getPageInfo(PageRequest pageRequest,PersonInfo personInfo) {
-        int pageNum = pageRequest.getPageNum();
-        int pageSize = pageRequest.getPageSize();
-        PageHelper.startPage(pageNum, pageSize);
+    
+        PageHelper.offsetPage(pageRequest.getOffset(), pageRequest.getLimit());
         List<PersonInfo> sysMenus = personInfoMapper.getPersonInfoList(personInfo);
         
         return new PageInfo<PersonInfo>(sysMenus);

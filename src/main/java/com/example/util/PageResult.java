@@ -25,7 +25,7 @@ public class PageResult {
     /**
      * 每页数量
      */
-    private int pageSize1;
+    private int pageSize;
     /**
      * 记录总数
      */
@@ -38,6 +38,10 @@ public class PageResult {
      * 数据模型
      */
     private List<?> data;
+    /**
+     * 数据模型
+     */
+    private List<?> rows;
     public int getPageNum() {
         return pageNum;
     }
@@ -46,12 +50,7 @@ public class PageResult {
     }
    
     
-    public int getPageSize1() {
-		return pageSize1;
-	}
-	public void setPageSize1(int pageSize1) {
-		this.pageSize1 = pageSize1;
-	}
+ 
 	public int getTotalPages() {
         return totalPages;
     }
@@ -70,5 +69,18 @@ public class PageResult {
 	public void setData(List<?> data) {
 		this.data = data;
 	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public List<?> getRows() {
+		return rows;
+	}
+	public void setRows(List<?> rows) {
+		this.rows = rows;
+	}
+	
    
 }

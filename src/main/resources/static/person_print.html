@@ -18,11 +18,12 @@
 
 <body style="border-radius: 8px" onload="change()">
 <!--<div class="title"><h2>通知详情</h2></div>-->
+
  <div class="top">
     <div>
         <div class="top_out">
 		
-            <table class="table" >
+            <table class="table"  border="0">
                 <tbody>
 
                 <tr>
@@ -31,19 +32,19 @@
 					<td style="border-top: none" >英文名：</td>
 					
                     <td   style="text-align: left;border-top: none"><input type="text"  id="yingwenming"  ></td>
-					<td  rowspan="3" align="center">
-					  <img src="" id="tupian" width="120" height="140">
-					
-						</td>
+					<td  rowspan="3" align="center"><input type="hidden" id="tupiandizhi"><img src="" id="tupian" width="120" height="140">
+					</td>
                 </tr>
                 <tr>
 					<td>出生日期：</td>
                     <td   style="text-align: left"><input id="chushengriqi" class="long_text" id="person"></td>
                     <td>性别：</td>
-                    <td  style="text-align: left"><select id="xingbie">
-                        <option>男</option>
-						  <option>女</option>
-                    </select></td>
+                    <td  style="text-align: left">
+                    	<select id="xingbie">
+                        	<option>男</option>
+						  	<option>女</option>
+                   		 </select>
+                    </td>
                     
                 </tr>
                 <tr>
@@ -51,30 +52,32 @@
                     <td  style="text-align: left"> <input type="text"  id="zuji"  /></td>
                     <td>证件信息：</td>
                     <td   style="text-align: left"><input type="text"  id="zhengjianxinxi"  ></td>
+                    
                  </tr>
 				  <tr>
                     <td>出逃日期：</td>
                     <td  style="text-align: left"> <input type="text"  id="chutaoriqi"  ></td>
                     <td>出逃国家：</td>
                     <td  style="text-align: left"><input type="text"  id="chutaoguojia"  ></td>
-                     <td><form id="form-avatar" enctype="multipart/form-data"><input type="file"  id="file" name="file" onchange="changepic(this)" /></form>	</td>
+                     <td><form id="form-avatar" enctype="multipart/form-data"><input type="hidden"  id="file" name="file" onchange="changepic(this)" /></form>	</td>
+					 
                  </tr>
 				  <tr>
                     <td>所在组织：</td>
                     <td  style="text-align: left"> <input type="text"  id="suozaizuzhi"  ></td>
                     <td>职位：</td>
                     <td  style="text-align: left"><input type="text"  id="zhiwei"  ></td>
+                   <td  >    <input class="btn" type="hidden" value="点击上传图片" onclick="upload()"/> </td>
                  </tr>
-                  <td  >    <input class="btn" type="button" value="上传" onclick="upload()"/> </td>
 				<tr>
                     <td>所属类别：</td>
                     <td colspan="4"   style="text-align: left">
 					<select id="suoshuleibie">
                         <option>境外</option>
-						  <option>境内</option>
-						    <option>美西</option>
-							  <option>敌对媒体</option>
-							    <option>国际媒体</option>
+						<option>境内</option>
+						  <option>美西</option>
+						 <option>敌对媒体</option>
+						   <option>国际媒体</option>
                     </select>
 					</td>
 					 
@@ -118,7 +121,8 @@
             </table>
         </div>
     </div>
-    <div class="bot_btn">
+    <div class="bot_btn"  style="display:none">
+    
         <input class="btn" type="button" value="保存" onclick="RecodeSave()"/>
         <button class="btn btn1"><a href="notice.html" target="right">返回</a></button>
     </div>
@@ -128,6 +132,11 @@
  
 <script src="js/date/js/laydate.js"></script>
 <script>
+
+
+
+
+
 
 function changepic() {
 	 $("#prompt3").css("display", "none");
@@ -139,6 +148,64 @@ function changepic() {
 	 
 	 };
 	}
+    function load(){
+    	   $.ajax({
+               type: "POST",
+               url: "/manager/personInfo/getPersonInfoById"+location.search,
+               data:{},
+              
+               success: function (result) {
+                   if (result.code=="0") {
+                       
+                	   
+                	   
+                	   
+                	   $("input").each(function(a,b){
+                		   var id = $(b).attr("id");
+                		  if(id=="tupiandizhi"){
+                			   
+                       	   if(result.data.tupiandizhi ==''||result.data.tupiandizhi==undefined){
+                       		   $("#tupian").attr("src","images/zanwutupian.jpg");  
+                       	   }else{
+                       	   		$("#tupian").attr("src","/file/showImage?id="+result.data.id);
+                       		   
+                       	   }
+                		  }else{
+                   		   $("#"+id).val(result.data[id]);
+               		    	$("#"+id).parent().html(result.data[id]);	  
+                		  }
+
+                		   
+                		  
+                	   });
+                	   $("textarea").each(function(a,b){
+                		   var id = $(b).attr("id");
+                		    
+                		    $("#"+id).val(result.data[id]);
+                		    $("#"+id).parent().html(result.data[id]);
+                	   });
+                	   $("select").each(function(a,b){
+                		   var id = $(b).attr("id");
+                		    
+                		    $("#"+id).val(result.data[id]);
+                		    $("#"+id).parent().html(result.data[id]);
+                		   
+                	   });
+                	
+                	   
+                	   
+                	   
+                	 //  debugger;
+                	   
+                	   
+                   } else {
+                       alert("保存失败！！！")
+                   }
+               }
+           });
+    	   
+    }
+    load();
     
 var tupiandizhi = "";
     function upload(){
@@ -152,14 +219,25 @@ var tupiandizhi = "";
                  processData: false,
                  contentType: false,
                  success:function(data){
-                	 tupiandizhi = data;
+                	 
+                	 $("#tupiandizhi").val(data);
                 	 }
                  });
     }
-    function RecodeSave() {
-             
-            
+    
+    function RecodeSave(){
+    	upload();
+    	if(location.search!=""){
+    		RecodeEditSave();
+    	}else{
+    		RecodeAddSave();
+    	}
+    	
+    }
+    
+    function RecodeEditSave() {
 			    	var personInfoJson = {
+			    			"id":$("#id").val(),
 							"youxiangdizhi":$("#youxiangdizhi").val(),
 							"xingbie":$("#xingbie").val(),
 							"zuji":$("#zuji").val(),
@@ -178,13 +256,13 @@ var tupiandizhi = "";
 							"zhiwei":$("#zhiwei").val(),
 							"canyuhuodong":$("#canyuhuodong").val(),
 							"fumianziliao":$("#fumianziliao").val(),
-							"tupiandizhi":tupiandizhi
+							"tupiandizhi":$("#tupiandizhi").val() 
 			    		};
 			console.info(personInfoJson);
 			    	
         $.ajax({
             type: "POST",
-            url: "/manager/personInfo/addPersonInfo",
+            url: "/manager/personInfo/updatePersonInfoById",
             data: JSON.stringify(personInfoJson),
             contentType:"application/json",  
             dataType: "json",
@@ -200,6 +278,51 @@ var tupiandizhi = "";
         });
          
     }
+    
+    
+    function RecodeAddSave() {
+    	var personInfoJson = {
+				"youxiangdizhi":$("#youxiangdizhi").val(),
+				"xingbie":$("#xingbie").val(),
+				"zuji":$("#zuji").val(),
+				"chutaoriqi":$("#chutaoriqi").val(),
+				"chushengriqi":$("#chushengriqi").val(),
+				"suoshuleibie":$("#suoshuleibie").val(),
+				"suozaizuzhi":$("#suozaizuzhi").val(),
+				"chutaoguojia":$("#chutaoguojia").val(),
+				"xingming":$("#xingming").val(),
+				"zhengjianxinxi":$("#zhengjianxinxi").val(),
+				"qitaxixi":$("#qitaxixi").val(),
+				"yingwenming":$("#yingwenming").val(),
+				"jiatingqingkuang":$("#jiatingqingkuang").val(),
+				"shoujiaoyuqingkuang":$("#shoujiaoyuqingkuang").val(),
+				"zaijingneichuliqingkuang":$("#zaijingneichuliqingkuang").val(),
+				"zhiwei":$("#zhiwei").val(),
+				"canyuhuodong":$("#canyuhuodong").val(),
+				"fumianziliao":$("#fumianziliao").val(),
+				"tupiandizhi":tupiandizhi
+    		};
+console.info(personInfoJson);
+    	
+$.ajax({
+type: "POST",
+url: "/manager/personInfo/addPersonInfo",
+data: JSON.stringify(personInfoJson),
+contentType:"application/json",  
+dataType: "json",
+success: function (result) {
+    if (result.code=="0") {
+        alert("保存成功！！！");
+        parent.getRecodeTableData();
+        TaskCancel();
+    } else {
+        alert("保存失败！！！")
+    }
+}
+});
+
+}
+    
     function TaskCancel() {
         var index = parent.layer.getFrameIndex(window.name)
         parent.layer.close(index);

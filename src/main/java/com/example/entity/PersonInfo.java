@@ -4,6 +4,8 @@ package com.example.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.example.util.PageRequest;
+
 import net.sf.json.JSONObject;
 
 /**
@@ -12,7 +14,7 @@ import net.sf.json.JSONObject;
  * @author 码农猿
  * @date 2019-03-25 23:08:13
  */
-public class PersonInfo implements Serializable {
+public class PersonInfo extends PageRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String  xingming;
@@ -164,6 +166,17 @@ public class PersonInfo implements Serializable {
 		PersonInfo n = new PersonInfo();
 		System.out.println(JSONObject.fromObject(n).toString());
 		
+	}
+	@Override
+	public String toString() {
+		return "PersonInfo [xingming=" + xingming + ", id=" + id + ", yingwenming=" + yingwenming + ", chushengriqi="
+				+ chushengriqi + ", xingbie=" + xingbie + ", zuji=" + zuji + ", zhengjianxinxi=" + zhengjianxinxi
+				+ ", chutaoriqi=" + chutaoriqi + ", chutaoguojia=" + chutaoguojia + ", suozaizuzhi=" + suozaizuzhi
+				+ ", zhiwei=" + zhiwei + ", suoshuleibie=" + suoshuleibie + ", shoujiaoyuqingkuang="
+				+ shoujiaoyuqingkuang + ", jiatingqingkuang=" + jiatingqingkuang + ", youxiangdizhi=" + youxiangdizhi
+				+ ", qitaxixi=" + qitaxixi + ", zaijingneichuliqingkuang=" + zaijingneichuliqingkuang
+				+ ", canyuhuodong=" + canyuhuodong + ", fumianziliao=" + fumianziliao + ", tupiandizhi=" + tupiandizhi
+				+ "]";
 	}
     
 

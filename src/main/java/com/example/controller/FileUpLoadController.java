@@ -56,7 +56,7 @@ public class FileUpLoadController {
                 else {
                     path = fileUpladPath + "other";
                 }
-                String fileName = f.getOriginalFilename();
+                String fileName = +System.currentTimeMillis()+f.getOriginalFilename();
                 File tarFile = new File(path, fileName);
                 fullPath = path+"\\"+fileName;
                 f.transferTo(tarFile);
@@ -67,25 +67,33 @@ public class FileUpLoadController {
     } 
     @GetMapping("/showImage")
     public @ResponseBody    void showImage(HttpServletRequest request,HttpServletResponse response,int id) throws IOException {
-    	response.setContentType("text/html; charset=UTF-8");
-     	response.setContentType("image/jpeg");
-    	PersonInfo personInfo = personInfoMapper.getPersonInfoById(id);
-    	String path = personInfo.getTupiandizhi();
-        FileInputStream fis = new FileInputStream(path);
-        OutputStream os = response.getOutputStream();
-        try {
-            int count = 0;
-            byte[] buffer = new byte[1024 * 1024];
-            while ((count = fis.read(buffer)) != -1)
-                os.write(buffer, 0, count);
-            os.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (os != null)
-                os.close();
-            if (fis != null)
-                fis.close();
-        }
+    	
+    	 
+    	try {
+			response.setContentType("text/html; charset=UTF-8");
+			response.setContentType("image/jpeg");
+			PersonInfo personInfo = personInfoMapper.getPersonInfoById(id);
+			String path = personInfo.getTupiandizhi();
+			FileInputStream fis = new FileInputStream(path);
+			OutputStream os = response.getOutputStream();
+			try {
+			    int count = 0;
+			    byte[] buffer = new byte[1024 * 1024];
+			    while ((count = fis.read(buffer)) != -1) {
+			        os.write(buffer, 0, count);
+			    }
+			    os.flush();
+			} catch (IOException e) {
+			    e.printStackTrace();
+			} finally {
+			    if (os != null)
+			        os.close();
+			    if (fis != null)
+			        fis.close();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			 
+		}
     }
 }

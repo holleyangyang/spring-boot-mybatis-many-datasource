@@ -82,7 +82,10 @@ public interface PersonInfoMapper {
    		 "where  id=#{id}")
 	int updatePersonInfoById(PersonInfo personInfo);
 	
-	 @Select("select * from oasysdb.person_info where id=#{id}")
+	 @Select(" <script>  select * from oasysdb.person_info where  1=1 "
+	 		+ " <if test='xingming!=null and xingming!=\"\"'> and xingming = #{xingming}</if>  "
+	 		+ " <if test='suozaizuzhi!=null and suozaizuzhi!=\"\"'> and suozaizuzhi = #{suozaizuzhi}</if>  "
+	 		+ "</script>")
     List<PersonInfo> getPersonInfoList(PersonInfo personInfo);
     
     @Select("select * from oasysdb.person_info where id=#{id}")

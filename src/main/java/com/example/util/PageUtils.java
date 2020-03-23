@@ -12,10 +12,11 @@ public class PageUtils {
     public static PageResult getPageResult(PageRequest pageRequest, PageInfo<?> pageInfo) {
         PageResult pageResult = new PageResult();
         pageResult.setPageNum(pageInfo.getPageNum());
-        pageResult.setPageSize1(pageInfo.getPageSize());
+        pageResult.setPageSize(pageInfo.getPageSize());
         pageResult.setCount(pageInfo.getTotal());
         pageResult.setTotalPages(pageInfo.getPages());
         pageResult.setData(pageInfo.getList());
+        pageResult.setRows(pageInfo.getList());
         return pageResult;
     }
 }

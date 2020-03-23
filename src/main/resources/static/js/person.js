@@ -12,34 +12,42 @@ function Personload() {
 			"zuji":"",
 			"chutaoriqi":"",
 			"chushengriqi":"",
-			"suoshuleibie":""
+			"suoshuleibie":"",
 		};
     
     
     
     $('#table').bootstrapTable({
-        url: "/manager/personInfo/getPersonInfoList?pageSize=2&pageNum=1"  ,
+        url: "/manager/personInfo/getPersonInfoList"  ,
         method: 'POST', 
         sidePagination : "client", //分页方式：client客户端分页，server服务端分页（*）
         pagination : true, //是否显示分页（*）
-        queryParams : personInfoJson, //分页
+        queryParams : JSON.stringify(personInfoJson), //分页
         pageSize : 10, //每页显示的记录数
+        contentType:"application/json",  
+
         pageNumber : 1, //当前第几页
-        pageList : [ 10, 25, 50, 100 ], //记录数可选列表
+        pageList : [ 10], //记录数可选列表
         responseHandler: function(data){
             return data.rows;  //约定rows
         }, 
         columns: [
 
             {
-                checkbox:"true",
-                field: 'ID',
+            	 title: "ID",
+                field: 'id',
                 align: 'center',
                 valign: 'middle'
             },
             {
                 title: "姓名",
                 field: 'xingming',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: "所属类别",
+                field: 'suoshuleibie',
                 align: 'center',
                 valign: 'middle'
             },
@@ -55,8 +63,13 @@ function Personload() {
                 align: 'center'
             },
             {
-                title: '出逃日期',
-                field: 'chutaoriqi',
+                title: '所在组织',
+                field: 'suozaizuzhi',
+                align: 'center'
+            },
+            {
+                title: '职位',
+                field: 'zhiwei',
                 align: 'center'
             },
             {
@@ -72,8 +85,9 @@ function Personload() {
                 align: 'center',
                 formatter: function (value, row) {
                     var e = '<button button="#" mce_href="#" onclick="del(\'' + row.id + '\')">删除</button> '
-                    var d = '<button button="#" mce_href="#" onclick="editNotice(\'' + row.id + '\')">编辑</button> ';
-                    return e + d;
+                    var d = '<button button="#" mce_href="#" onclick="edit(\'' + row.id + '\')">编辑</button> ';
+                    var f = '<button button="#" mce_href="#" onclick="show(\'' + row.id + '\')">查看打印</button> ';
+                    return e + d+f;
                 }
             }
         ]
@@ -82,28 +96,30 @@ function Personload() {
     
     
 }
-Personload();
-function getData() {
-   
-    
-    
-    var personInfoJson = {
-			"youxiangdizhi":"",
-			"xingbie":"",
+
+function getPara (){
+	var personInfoJson = {
+			"xingming":$("#xingming").val(),
+			"suozaizuzhi":$("#suozaizuzhi").val(),
 			"zuji":"",
 			"chutaoriqi":"",
 			"chushengriqi":"",
-			"suoshuleibie":""
+			"suoshuleibie":"" ,
+			"offset":0,
+			"limit":10
 		};
-    
-    
-    
+	return personInfoJson;
+}
+
+Personload();
+function getData() {
     $.ajax({
         type: "POST",
-        url: "/manager/personInfo/getPersonInfoList?pageSize=2&pageNum=1"  ,
+        url: "/manager/personInfo/getPersonInfoList"  ,
         dataType: "json",
+        
         contentType:"application/json",  
-        data: JSON.stringify(personInfoJson),
+        data: JSON.stringify(getPara()),
         success: function (result) {
             if (result.data) {
                 var TableData = result.data;
@@ -113,15 +129,26 @@ function getData() {
     })
 }
 function add() {
-    openlayer()
+    openlayer('person_edit.html')
     currentID = "";
 }
 function edit(id) {
-    openlayer()
-    currentID = id;
+    openlayer('person_edit.html?id='+id)
+  
+}
+
+function show(id){
+    window.open('person_print.html?id='+id);
+
 }
 function del(id) {
     
+	var is=window.confirm("确认删除吗？");
+	
+	if(is){
+		
+	
+	
     var personInfoJson = {
 			 
 			"id":id
@@ -144,11 +171,12 @@ function del(id) {
         error: function (err) {
         }
     });
+	}
 }
 function getCurrentID() {
     return currentID;
 }
-function openlayer(id){
+function openlayer(url){
     layer.open({
         type: 2,
         title: '添加信息',
@@ -160,7 +188,7 @@ function openlayer(id){
         area: ['80%', '90%'],
         shadeClose: true,
         closeBtn: 2,
-        content: 'person_add.html'
+        content: url
         //iframe的url
     });
 }
